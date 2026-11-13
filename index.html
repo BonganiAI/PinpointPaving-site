@@ -93,9 +93,6 @@
   .orbit-arc::after { content: ''; position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%; background: rgb(var(--pop)); box-shadow: 0 0 10px rgb(var(--pop)); }
   .orbit-dash { position: absolute; inset: -4px; border-radius: 50%; border: 1.5px dashed rgb(var(--brand-light) / .35); animation: spin 16s linear infinite reverse; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  /* Header hides on scroll down, returns on scroll up */
-  .site-header { transition: transform .5s cubic-bezier(.22,1,.36,1); }
-  .site-header.is-hidden { transform: translateY(-100%); }
   @media (prefers-reduced-motion: reduce) {
     html.js [data-reveal] > * { opacity: 1; transform: none; transition: none; }
     html.js .hero-img, html.js .hero-copy > *, html.js .hero-h1 > span, .orbit-arc, .orbit-dash { animation: none !important; }
@@ -469,14 +466,6 @@
 
 
 
-  const header = document.querySelector('.site-header');
-  let lastY = window.scrollY;
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    const menuOpen = !document.getElementById('mobile-menu').classList.contains('hidden');
-    header.classList.toggle('is-hidden', y > lastY && y > 240 && !menuOpen);
-    lastY = y;
-  }, { passive: true });
 
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
